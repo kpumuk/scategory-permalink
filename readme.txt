@@ -3,7 +3,7 @@ Contributors: kpumuk
 Tags: category, permalink
 Requires at least: 2.0.2
 Tested up to: 2.1
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 
 Plugin allows to select category which will be used to generate permalink on post edit page. Use custom permalink option %scategory%.
 

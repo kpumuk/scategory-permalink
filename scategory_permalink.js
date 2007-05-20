@@ -1,3 +1,4 @@
+/* sCategory Permalink 0.2.2 */
 function sCategoryPermalinkInit() {
 	var list = document.getElementById('categorychecklist');
 	if (!list) return;
@@ -24,10 +25,4 @@ function sCategoryPermalinkInit() {
 			radio.checked = true;
 		} 
 	}
-}
-
-if (window.addEventListener) {
-	window.addEventListener('load', sCategoryPermalinkInit, false);
-} else if (window.attachEvent) {
-	window.attachEvent('onload', sCategoryPermalinkInit);
 }
