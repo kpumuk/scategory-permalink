@@ -3,11 +3,11 @@
 Plugin Name: sCategory Permalink
 Plugin URI: http://kpumuk.info/projects/wordpress-plugins/scategory-permalink/
 Description: Plugin allows to select category which will be used to generate permalink on post edit page. Use custom permalink option %scategory% on <a href="options-permalink.php">Permalinks</a> options page.
-Version: 0.2.2
+Version: 0.3.0
 Author: Dmytro Shteflyuk
 Author URI: http://kpumuk.info/
 */
-/*  Copyright 2006  Dmytro Shteflyuk  (email: kpumuk@kpumuk.info)
+/*  Copyright 2006-2008  Dmytro Shteflyuk  (email: kpumuk@kpumuk.info)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ add_action('admin_footer', array(&$sCategoryPermalink, 'addCurrentCategory'));
 
 /** Filters */
 add_filter('post_link', array(&$sCategoryPermalink, 'parseLink'), 10, 2);
-add_filter('init', array(&$sCategoryPermalink, 'addRewriteRules'), 10, 0);
+add_filter('post_rewrite_rules', array(&$sCategoryPermalink, 'addRewriteRules'));
 
 /** Actions */
 add_action('edit_post', array(&$sCategoryPermalink, 'savePost'));
@@ -46,7 +46,7 @@ unset ($sCategoryPermalink);
 
 /** sCategory plugin class */
 class sCategoryPermalink {
-  var $pluginLocation = '/wp-content/plugins/scategory_permalink';
+  var $pluginLocation = '/wp-content/plugins/scategory-permalink';
   
   function parseLink($permalink, $post) {
     $rewritecode = array(
@@ -77,9 +77,17 @@ class sCategoryPermalink {
     return $permalink;
   }
   
-  function addRewriteRules() {
+  function addRewriteRules($rewrite) {
     global $wp_rewrite;
     $wp_rewrite->add_rewrite_tag('%scategory%', '(.+?)', 'category_name=');
+    
+    $scategory_structure = $wp_rewrite->root . "%scategory%/%postname%";
+    
+    $structure = ltrim($wp_rewrite->permalink_structure, '/');
+    if (0 === strpos($structure, '%scategory%'))
+      $wp_rewrite->use_verbose_page_rules = true;
+    
+    return array_merge($rewrite, $wp_rewrite->generate_rewrite_rules($scategory_structure));
   }
   
   function addOptions() {

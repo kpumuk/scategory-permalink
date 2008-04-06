@@ -1,4 +1,4 @@
-/* sCategory Permalink 0.2.2 */
+/* sCategory Permalink 0.3.0 */
 function sCategoryPermalinkInit() {
 	var list = document.getElementById('categorychecklist');
 	if (!list) return;

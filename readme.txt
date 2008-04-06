@@ -2,8 +2,8 @@
 Contributors: kpumuk
 Tags: category, permalink
 Requires at least: 2.0.2
-Tested up to: 2.1
-Stable tag: 0.2.2
+Tested up to: 2.5
+Stable tag: 0.3.0
 
 Plugin allows to select category which will be used to generate permalink on post edit page. Use custom permalink option %scategory%.
 
@@ -13,7 +13,7 @@ Permalink option of Wordpress <tt>%category%</tt> has one great limitation -- wh
 
 == Installation ==
 
-1. Download and unpack plugin files to wp-content/plugins/scategory_permalink directory.
+1. Download and unpack plugin files to wp-content/plugins/scategory-permalink directory.
 2. Enable “sCategory Permalink” plugin on your Plugins page in Site Admin.
 3. Go to the Options/Permalinks page in Site Admin and use %scategory% option in Custom text field (you can look <a href="http://codex.wordpress.org/Using_Permalinks">here</a> for other options). For example you could use /%scategory%/%postname%/.
 4. Now on Write Post page near the categories checkboxes radio button will appear.
