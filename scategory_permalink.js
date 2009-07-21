@@ -1,28 +1,14 @@
-/* sCategory Permalink 0.3.0 */
+/* sCategory Permalink 0.4.0 */
 function sCategoryPermalinkInit() {
-	var list = document.getElementById('categorychecklist');
-	if (!list) return;
-	
-	var labels = list.getElementsByTagName('label');
-	for (var i = 0; i < labels.length; i++) {
-		var checkbox = labels[i].getElementsByTagName('input')[0];
-		if (!checkbox) continue;
-		
-		try {
-			var radio = document.createElement('<input type="radio" name="category_permalink" />');
-		} catch(err){
-			var radio = document.createElement('input');
-			radio.setAttribute('type','radio');
-			radio.setAttribute('name','category_permalink');
-		}
-		radio.value = checkbox.value;
+  if (typeof(sCategoryPermalinkCurrent) == 'undefined') sCategoryPermalinkCurrent = '';
 
-		labels[i].insertBefore(radio, checkbox);
-		labels[i].insertBefore(document.createTextNode(' '), checkbox);
+  var list = jQuery('#categorychecklist label input[type=checkbox]').each(function(idx) {
+    radio = ['<input type="radio" name="category_permalink" value="' + this.value + '"'];
+    if (sCategoryPermalinkCurrent == this.value) {
+      radio.push('checked="checked"');
+    }
+    radio.push('/>');
 
-		if (typeof(sCategoryPermalinkCurrent) == 'undefined') sCategoryPermalinkCurrent = '';
-		if (sCategoryPermalinkCurrent == checkbox.value) {
-			radio.checked = true;
-		} 
-	}
+    jQuery(this).before(radio.join(' '));
+  });
 }
