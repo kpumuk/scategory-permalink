@@ -47,8 +47,6 @@ unset ($sCategoryPermalink);
 
 /** sCategory plugin class */
 class sCategoryPermalink {
-  var $pluginLocation = '/wp-content/plugins/scategory-permalink';
-
   function parseLink($permalink, $post) {
     $rewritecode = array(
       '%scategory%',
@@ -93,8 +91,8 @@ class sCategoryPermalink {
 
   function addOptions() {
     if ($this->isOnThePostPage()) {
-      echo '<script type="text/javascript" src="', get_option('siteurl'),
-        $this->pluginLocation , '/scategory_permalink.js"></script>', "\n";
+      $url = plugins_url(basename(dirname(__FILE__)) . '/scategory_permalink.js');
+      echo "<script type=\"text/javascript\" src=\"$url\"></script>\n";
     }
   }
 
