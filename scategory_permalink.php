@@ -3,7 +3,7 @@
 Plugin Name: sCategory Permalink
 Plugin URI: http://kpumuk.info/projects/wordpress-plugins/scategory-permalink/
 Description: Plugin allows to select category which will be used to generate permalink on post edit page. Use custom permalink option <tt>%scategory%</tt> on <a href="options-permalink.php">Permalinks</a> options page.
-Version: 0.4.0
+Version: 0.5.0
 Author: Dmytro Shteflyuk
 Author URI: http://kpumuk.info/
 */
@@ -39,39 +39,39 @@ add_filter('init', array(&$sCategoryPermalink, 'addRewriteRules'));
 add_filter('post_rewrite_rules', array(&$sCategoryPermalink, 'setVerbosePageRules'));
 
 /** Actions */
-add_action('edit_post', array(&$sCategoryPermalink, 'savePost'));
-add_action('publish_post', array(&$sCategoryPermalink, 'savePost'));
-add_action('save_post', array(&$sCategoryPermalink, 'savePost'));
+add_action('transition_post_status', array(&$sCategoryPermalink, 'savePost'), -1000, 3);
 
 unset ($sCategoryPermalink);
 
 /** sCategory plugin class */
 class sCategoryPermalink {
   function parseLink($permalink, $post) {
-    $rewritecode = array(
-      '%scategory%',
-    );
-
-    if ('' != $permalink && 'draft' != $post->post_status) {
+    if ('' != $permalink && !in_array($post->post_status, array('draft', 'pending'))) {
       $category = '';
-      if (strstr($permalink, '%scategory%')) {
+      if (strpos($permalink, '%scategory%') !== false) {
         $cat = null;
-        $category_permalink = $post->ID ? get_post_meta($post->ID, '_category_permalink', true) : null;
-
+        $category_permalink = get_post_meta($post->ID, '_category_permalink', true);
         if ($category_permalink) $cat = get_category($category_permalink);
+        
         if (!$cat) {
           $cats = get_the_category($post->ID);
+          usort($cats, '_usort_terms_by_ID'); // order by ID
           $cat = $cats[0];
         }
 
-        $category = $cat->category_nicename;
-        if ($parent=$cat->category_parent)
-          $category = get_category_parents($parent, FALSE, '/', TRUE) . $category;
+        $category = $cat->slug;
+        if ($parent = $cat->parent)
+          $category = get_category_parents($parent, false, '/', true) . $category;
+
+        // show default category in permalinks, without
+        // having to assign it explicitly
+        if (empty($category)) {
+          $default_category = get_category(get_option('default_category'));
+          $category = is_wp_error($default_category) ? '' : $default_category->slug;
+        }
       }
-      $rewritereplace = array(
-        $category
-      );
-      return str_replace($rewritecode, $rewritereplace, $permalink);
+      $p = str_replace('%scategory%', $category, $permalink);
+      return $p;
     }
     return $permalink;
   }
@@ -100,39 +100,33 @@ class sCategoryPermalink {
     if ($this->isOnThePostPage()) {
       global $post;
 
-      $post_ID = $post->ID;
       $post_init = '';
-      if ($post_ID) {
-        $category_permalink = get_post_meta($post_ID, '_category_permalink', true);
+      if ($post->ID) {
+        $category_permalink = get_post_meta($post->ID, '_category_permalink', true);
         $post_init = 'var sCategoryPermalinkCurrent="' . $category_permalink . '";';
       }
       echo '<script type="text/javascript">' , $post_init , 'sCategoryPermalinkInit();</script>', "\n";
     }
   }
 
-  function savePost($post_ID) {
-    /* Modified by Caio Proiete on 2007-03-25.
-     * Are we inside post.php or post-new.php?
-     */
-    if (!$this->isOnThePostPage()) return;
-
+  function savePost($new_status, $old_status, $post) {
     $category_permalink = $_POST['category_permalink'];
 
-    $post_category = function_exists('wp_get_post_categories') ? wp_get_post_categories($post_ID) : wp_get_post_cats('', $post_ID);
     if (isset($category_permalink)) {
+      $cats = wp_get_post_categories($post->ID);
+
       $found = false;
-      foreach ($post_category as $cid)
+      foreach ($cats as $cid) {
         if ($cid == $category_permalink) {
           $found = true;
           break;
         }
-      if (!$found) $category_permalink = $post_category[0];
-    } else {
-      $category_permalink = $post_category[0];
-    }
+      }
+      if (!$found) $category_permalink = $cats[0];
 
-    if (!update_post_meta($post_ID, '_category_permalink', $category_permalink))
-      add_post_meta($post_ID, '_category_permalink',  $category_permalink, true);
+      if (!update_post_meta($post->ID, '_category_permalink', $category_permalink))
+        add_post_meta($post->ID, '_category_permalink',  $category_permalink, true);
+    }
   }
 
   function isOnThePostPage() {
