@@ -1,9 +1,9 @@
 === sCategory Permalink ===
 Contributors: kpumuk
-Tags: category, permalink
-Requires at least: 2.1.0
+Tags: category, permalink, permalinks, seo
+Requires at least: 2.3.0
 Tested up to: 2.8.2
-Stable tag: 0.5.0
+Stable tag: 0.5.1
 
 Plugin allows to select category which will be used to generate permalink on
 post edit page. Use custom permalink option %scategory%.
@@ -14,6 +14,15 @@ Permalink option of Wordpress `%category%` has one great limitation –
 when this option is selected, Wordpress uses category with lowest ID for
 permalink generation. This plugin is intented to bypass Wordpress permalinks
 limitation and allows you to select category for permalink generation.
+
+= Support =
+
+If you have any suggestions, found a bug, or just wanted to say "thank
+you",– feel free to email me <a href="mailto:kpumuk@kpumuk.info">kpumuk@kpumuk.info</a>.
+Promise, I will answer every email I received.
+
+If you want to contribute your code, see the *Development* section under
+the *Other Notes* tab.
 
 == Installation ==
 
@@ -54,6 +63,9 @@ use `%scategory%` instead of `%category%`.
 
 == Changelog ==
 
+= 0.5.1 =
+* Requires at least WordPress 2.3.0
+
 = 0.5.0 (July 28, 2009) =
 * Fixed problem with Subscribe2 plugin (thanks to <a href="http://www.synthgear.com/">Paul Wagorn</a>).
 * Performance improvement (update meta tags only once per save).
@@ -68,3 +80,15 @@ use `%scategory%` instead of `%category%`.
 
 = v0.2.2 (May 20, 2007) =
 * Sometimes radio buttons was not displayed (thanks to Vince Caughley and <a href="http://codeelements.com/">Sam Keen</a>).
+
+== Development ==
+
+Sources of this plugin are available both in SVN and Git:
+
+* <a href="http://svn.wp-plugins.org/scategory-permalink/">WordPress SVN repository</a>
+* <a href="http://github.com/kpumuk/scategory-permalink/">GitHub</a>
+
+Feel free to check them out, make your changes and send me patches.
+Promise, I will apply every patch (of course, if they add a value to the
+product). Email for patches, suggestions, or bug reports:
+<a href="mailto:kpumuk@kpumuk.info">kpumuk@kpumuk.info</a>.
