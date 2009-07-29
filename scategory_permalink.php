@@ -3,7 +3,7 @@
 Plugin Name: sCategory Permalink
 Plugin URI: http://kpumuk.info/projects/wordpress-plugins/scategory-permalink/
 Description: Plugin allows to select category which will be used to generate permalink on post edit page. Use custom permalink option <tt>%scategory%</tt> on <a href="options-permalink.php">Permalinks</a> options page.
-Version: 0.5.1
+Version: 0.6.0
 Author: Dmytro Shteflyuk
 Author URI: http://kpumuk.info/
 */
@@ -93,6 +93,7 @@ class sCategoryPermalink {
     if ($this->isOnThePostPage()) {
       $url = plugins_url(basename(dirname(__FILE__)) . '/scategory_permalink.js');
       echo "<script type=\"text/javascript\" src=\"$url\"></script>\n";
+      echo "<style type=\"text/css\">.scategory_link{vertical-align:middle;display:none}</script>\n";
     }
   }
 
@@ -100,17 +101,16 @@ class sCategoryPermalink {
     if ($this->isOnThePostPage()) {
       global $post;
 
-      $post_init = '';
+      $categoryID = '';
       if ($post->ID) {
-        $category_permalink = get_post_meta($post->ID, '_category_permalink', true);
-        $post_init = 'var sCategoryPermalinkCurrent="' . $category_permalink . '";';
+        $categoryID = get_post_meta($post->ID, '_category_permalink', true);
       }
-      echo '<script type="text/javascript">' , $post_init , 'sCategoryPermalinkInit();</script>', "\n";
+      echo "<script type=\"text/javascript\">jQuery('#categorydiv').sCategoryPermalink({current: '$categoryID'});</script>\n";
     }
   }
 
   function savePost($new_status, $old_status, $post) {
-    $category_permalink = $_POST['category_permalink'];
+    $category_permalink = $_POST['scategory_permalink'];
 
     if (isset($category_permalink)) {
       $cats = wp_get_post_categories($post->ID);

@@ -1,9 +1,9 @@
 === sCategory Permalink ===
 Contributors: kpumuk
 Tags: category, permalink, permalinks, seo
-Requires at least: 2.3.0
+Requires at least: 2.7.0
 Tested up to: 2.8.2
-Stable tag: 0.5.1
+Stable tag: 0.6.0
 
 Plugin allows to select category which will be used to generate permalink on
 post edit page. Use custom permalink option %scategory%.
@@ -33,8 +33,10 @@ the *Other Notes* tab.
 3. Go to the *Options/Permalinks* page in *Site Admin* and use `%scategory%`
    option in *Custom text* field (you can look <a href="http://codex.wordpress.org/Using_Permalinks">here</a>
    for other options). For example you could use `/%scategory%/%postname%/`.
-4. Now on Write Post page near the categories checkboxes radio button will
-   appear.
+4. When you move your mouse over category in *Categories* box the
+   **Primary** link will appear on the right. Click it to set the category
+   which will be used to generate permalinks. It will be highlighted
+   with bold.
 
 = Upgrade =
 
@@ -42,8 +44,10 @@ the *Other Notes* tab.
    directory.
 2. Go to the *Options/Permalinks* page in *Site Admin* and click *Save Changes*
    to re-generate permalinks.
-3. Now on Write Post page near the categories checkboxes radio button will
-   appear.
+3. When you move your mouse over category in *Categories* box the
+   **Primary** link will appear on the right. Click it to set the category
+   which will be used to generate permalinks. It will be highlighted
+   with bold.
 
 == Frequently Asked Questions ==
 
@@ -63,8 +67,9 @@ use `%scategory%` instead of `%category%`.
 
 == Changelog ==
 
-= 0.5.1 =
-* Requires at least WordPress 2.3.0
+= 0.6.0 (July 30, 2009) =
+* Client side script completely rewritten. New visual look and better
+  usability (thanks to <a href="http://nikolay.com/">Nikolay Kolev</a>).
 
 = 0.5.0 (July 28, 2009) =
 * Fixed problem with Subscribe2 plugin (thanks to <a href="http://www.synthgear.com/">Paul Wagorn</a>).
