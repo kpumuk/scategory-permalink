@@ -93,7 +93,7 @@ class sCategoryPermalink {
     if ($this->isOnThePostPage()) {
       $url = plugins_url(basename(dirname(__FILE__)) . '/scategory_permalink.js');
       echo "<script type=\"text/javascript\" src=\"$url\"></script>\n";
-      echo "<style type=\"text/css\">.scategory_link{vertical-align:middle;display:none}</script>\n";
+      echo "<style type=\"text/css\">.scategory_link{vertical-align:middle;display:none}</style>\n";
     }
   }
 
