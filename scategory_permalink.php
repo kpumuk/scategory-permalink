@@ -3,7 +3,7 @@
 Plugin Name: sCategory Permalink
 Plugin URI: http://kpumuk.info/projects/wordpress-plugins/scategory-permalink/
 Description: Plugin allows to select category which will be used to generate permalink on post edit page. Use custom permalink option <tt>%scategory%</tt> on <a href="options-permalink.php">Permalinks</a> options page.
-Version: 0.6.1
+Version: 0.6.2
 Author: Dmytro Shteflyuk
 Author URI: http://kpumuk.info/
 */

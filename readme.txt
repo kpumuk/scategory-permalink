@@ -3,7 +3,7 @@ Contributors: kpumuk
 Tags: category, permalink, permalinks, seo
 Requires at least: 2.7.0
 Tested up to: 2.8.2
-Stable tag: 0.6.1
+Stable tag: 0.6.2
 
 Plugin allows to select category which will be used to generate permalink on
 post edit page. Use custom permalink option %scategory%.
@@ -71,6 +71,9 @@ And thank you!
 1. Write Post page with sCategory Permalink enabled.
 
 == Changelog ==
+
+= 0.6.2 (July 30, 2009) =
+* Nothing really changed. Just to force WordPress to update version.
 
 = 0.6.1 (July 30, 2009) =
 * Fixed blank page when post edit page requested.
