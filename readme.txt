@@ -67,6 +67,10 @@ use `%scategory%` instead of `%category%`.
 
 == Changelog ==
 
+= 0.6.1 (July 30, 2009) =
+* Fixed blank page when post edit page requested.
+* Fixed "Primary" link appear on all sub-categories, when category selected.
+
 = 0.6.0 (July 30, 2009) =
 * Client side script completely rewritten. New visual look and better
   usability (thanks to <a href="http://nikolay.com/">Nikolay Kolev</a>).

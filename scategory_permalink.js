@@ -46,7 +46,7 @@
     }
     
     function onMouseOver() {
-      $(this).find('a.scategory_link').show();
+      $(this).find('a.scategory_link:first').show();
     }
     
     function onMouseOut() {
