@@ -3,7 +3,7 @@ Contributors: kpumuk
 Tags: category, permalink, permalinks, seo
 Requires at least: 2.7.0
 Tested up to: 2.8.2
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 
 Plugin allows to select category which will be used to generate permalink on
 post edit page. Use custom permalink option %scategory%.
@@ -60,6 +60,11 @@ re-generate permalinks.
 
 Check the permalinks structure you used (*Options/Permalinks*). You should
 use `%scategory%` instead of `%category%`.
+
+= I love this plugin. How to do a favor to the author? =
+
+Just vote for this plugin on <a href="http://wordpress.org/extend/plugins/scategory-permalink/">WordPress.org</a>.
+And thank you!
  
 == Screenshots ==
 
