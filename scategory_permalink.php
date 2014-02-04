@@ -79,6 +79,8 @@ class sCategoryPermalink {
   function addRewriteRules() {
     global $wp_rewrite;
     $wp_rewrite->add_rewrite_tag('%scategory%', '(.+?)', 'category_name=');
+    if (preg_match("/^[^%]*%scategory%/", $wp_rewrite->permalink_structure) )
+      $wp_rewrite->use_verbose_page_rules = true;
   }
 
   function setVerbosePageRules($post_rewrite) {
